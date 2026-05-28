@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GUVI Product One-Pagers — Sales Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --ink:       #172B4D;
+      --ink-2:     #42526E;
+      --ink-3:     #6B778C;
+      --line:      #DFE1E6;
+      --surface:   #F4F5F7;
+      --white:     #FFFFFF;
+      --brand:     #0052CC;
+      --brand-dk:  #0747A6;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: var(--surface);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 64px;
+    }
+
+    header {
+      margin-bottom: 40px;
+    }
+
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: clamp(1.5rem, 4vw, 1.875rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: var(--ink);
+    }
+
+    .lead {
+      margin-top: 10px;
+      font-size: 15px;
+      color: var(--ink-2);
+      max-width: 42ch;
+    }
+
+    .products {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .product-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+    }
+
+    .product-link:hover {
+      border-color: #B3D4FF;
+      box-shadow: 0 4px 16px rgba(9, 30, 66, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .product-link:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+
+    .accent {
+      width: 4px;
+      align-self: stretch;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .accent--fsd   { background: #006644; }
+    .accent--uiux  { background: #0052CC; }
+    .accent--devops { background: #FC8019; }
+
+    .product-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .product-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .product-meta {
+      margin-top: 4px;
+      font-size: 13px;
+      color: var(--ink-3);
+    }
+
+    .arrow {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-3);
+      font-size: 14px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .product-link:hover .arrow {
+      background: var(--brand);
+      color: var(--white);
+    }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      font-size: 12px;
+      color: var(--ink-3);
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <p class="eyebrow">GUVI · Sales</p>
+      <h1>Product one-pagers</h1>
+      <p class="lead">Quick reference for course details, modules, and talking points. Open a product below.</p>
+    </header>
+
+    <ul class="products">
+      <li>
+        <a class="product-link" href="FSD_Course_OnePager.html">
+          <span class="accent accent--fsd" aria-hidden="true"></span>
+          <span class="product-body">
+            <span class="product-title">Full Stack Engineering Course</span>
+            <span class="product-meta">GUVI Engineering · 2026</span>
+          </span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li>
+        <a class="product-link" href="AI_UIUX_Design_Fellowship_OnePager.html">
+          <span class="accent accent--uiux" aria-hidden="true"></span>
+          <span class="product-body">
+            <span class="product-title">AI-Powered UI/UX &amp; Product Design Fellowship</span>
+            <span class="product-meta">GUVI Design · 2026</span>
+          </span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li>
+        <a class="product-link" href="DevOps_Course_CheatSheet_v2%20(1).html">
+          <span class="accent accent--devops" aria-hidden="true"></span>
+          <span class="product-body">
+            <span class="product-title">DevOps Engineering Program</span>
+            <span class="product-meta">GUVI DevOps · Cohort 2026</span>
+          </span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+    </ul>
+
+    <footer>GUVI internal · Product one-pagers</footer>
+  </main>
+</body>
+</html>
