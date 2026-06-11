@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI Powered Business Analytics — GUVI 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --orange:        #EA580C;
+    --orange-dark:   #C2410C;
+    --orange-soft:   #FFF7ED;
+    --orange-mid:    #FED7AA;
+    --amber:         #D97706;
+    --amber-dark:    #B45309;
+    --amber-soft:    #FFFBEB;
+    --amber-mid:     #FDE68A;
+    --rose:          #E11D48;
+    --rose-soft:     #FFF1F2;
+    --rose-mid:      #FECDD3;
+    --teal:          #0F766E;
+    --teal-soft:     #F0FDFA;
+    --teal-mid:      #99F6E4;
+    --violet:        #7C3AED;
+    --violet-soft:   #F5F3FF;
+    --violet-mid:    #DDD6FE;
+    --ink:           #1A1A1A;
+    --ink-2:         #3D3D3D;
+    --ink-3:         #717171;
+    --line:          #F0E8DF;
+    --surface:       #FDF8F4;
+    --white:         #FFFFFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--surface);
+    color: var(--ink);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 20px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* ══ HEADER ══ */
+  .header {
+    background: linear-gradient(135deg, #EA580C 0%, #C2410C 50%, #7C2D12 100%);
+    border-radius: 16px; padding: 28px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; position: relative; overflow: hidden;
+  }
+  .header::after { content:''; position:absolute; top:-60px; right:-60px; width:220px; height:220px; border-radius:50%; background:rgba(255,255,255,0.06); pointer-events:none; }
+  .header::before { content:''; position:absolute; bottom:-70px; left:28%; width:180px; height:180px; border-radius:50%; background:rgba(255,255,255,0.04); pointer-events:none; }
+  .header-text { position:relative; z-index:1; }
+  .header-eyebrow { font-size:10px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.62); margin-bottom:6px; }
+  .header-title { font-size:clamp(22px,3.5vw,34px); font-weight:800; color:#fff; line-height:1.1; letter-spacing:-0.02em; }
+  .header-sub { font-size:13px; color:rgba(255,255,255,0.70); margin-top:6px; font-weight:400; }
+  .header-stats { display:flex; gap:10px; flex-shrink:0; position:relative; z-index:1; flex-wrap:wrap; justify-content:flex-end; }
+  .hstat { background:rgba(255,255,255,0.13); border:1px solid rgba(255,255,255,0.22); border-radius:12px; padding:10px 14px; text-align:center; min-width:72px; }
+  .hstat-num { font-size:24px; font-weight:800; color:#fff; line-height:1; }
+  .hstat-lbl { font-size:9.5px; color:rgba(255,255,255,0.68); font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-top:3px; }
+
+  /* ══ KPI STRIP ══ */
+  .kpi-strip { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:12px; }
+  .kpi { background:var(--white); border:1px solid var(--line); border-radius:12px; border-top:3px solid var(--orange); padding:14px 12px; text-align:center; }
+  .kpi-num  { font-size:26px; font-weight:800; color:var(--orange); line-height:1; }
+  .kpi-unit { font-size:13px; font-weight:700; color:var(--orange); }
+  .kpi-lbl  { font-size:11px; font-weight:600; color:var(--ink-3); text-transform:uppercase; letter-spacing:0.07em; margin-top:4px; }
+
+  /* ══ SECTION LABEL ══ */
+  .sec-label { display:flex; align-items:center; gap:10px; font-size:10px; font-weight:800; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-3); margin-bottom:12px; }
+  .sec-label::after { content:''; flex:1; height:1px; background:var(--line); }
+
+  /* ══ MAIN GRID ══ */
+  .main-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+
+  /* ══ CARD ══ */
+  .card { background:var(--white); border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+  .card-head { padding:14px 18px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:10px; }
+  .card-head-orange { background:var(--orange-soft); border-bottom-color:var(--orange-mid); }
+  .card-head-amber  { background:var(--amber-soft);  border-bottom-color:var(--amber-mid); }
+  .card-head-rose   { background:var(--rose-soft);   border-bottom-color:var(--rose-mid); }
+  .card-head-teal   { background:var(--teal-soft);   border-bottom-color:var(--teal-mid); }
+  .card-head-violet { background:var(--violet-soft); border-bottom-color:var(--violet-mid); }
+  .card-icon { width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+  .ci-orange { background:var(--orange); }
+  .ci-amber  { background:var(--amber); }
+  .ci-rose   { background:var(--rose); }
+  .ci-teal   { background:var(--teal); }
+  .ci-violet { background:var(--violet); }
+  .card-title { font-size:14px; font-weight:800; color:var(--ink); letter-spacing:-0.01em; }
+  .card-body  { padding:16px 18px; }
+
+  /* ══ MODULE LIST ══ */
+  .mod-list { display:flex; flex-direction:column; gap:5px; }
+  .mod-row { display:grid; grid-template-columns:38px 1fr auto; align-items:center; gap:8px; padding:7px 10px; border-radius:8px; background:var(--surface); border:1px solid var(--line); }
+  .mod-badge { font-size:9px; font-weight:800; padding:3px 5px; border-radius:5px; text-align:center; letter-spacing:0.04em; line-height:1.3; }
+  .mb-orange { background:var(--orange-mid); color:var(--orange-dark); }
+  .mb-amber  { background:var(--amber-mid);  color:var(--amber-dark); }
+  .mb-rose   { background:var(--rose-mid);   color:#9F1239; }
+  .mb-teal   { background:rgba(15,118,110,0.15); color:var(--teal); }
+  .mb-violet { background:var(--violet-mid); color:#5B21B6; }
+  .mod-name { font-size:12px; font-weight:500; color:var(--ink-2); line-height:1.35; }
+  .mod-name.em-amber  { color:var(--amber-dark); font-weight:600; }
+  .mod-name.em-rose   { color:var(--rose);       font-weight:600; }
+  .mod-name.em-teal   { color:var(--teal);       font-weight:600; }
+  .mod-name.em-violet { color:var(--violet);     font-weight:700; }
+  .mod-hrs { font-size:13px; white-space:nowrap; }
+  .divider-banner { font-size:10px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; text-align:center; padding:5px 12px; border-radius:6px; margin:6px 0 4px; }
+  .db-orange { background:var(--orange-soft); color:var(--orange-dark); border:1px solid var(--orange-mid); }
+  .db-amber  { background:var(--amber-soft);  color:var(--amber-dark);  border:1px solid var(--amber-mid); }
+  .db-rose   { background:var(--rose-soft);   color:#9F1239;            border:1px solid var(--rose-mid); }
+  .db-teal   { background:var(--teal-soft);   color:var(--teal);        border:1px solid var(--teal-mid); }
+  .db-violet { background:var(--violet-soft); color:#5B21B6;            border:1px solid var(--violet-mid); }
+
+  /* ══ TOOL PILLS ══ */
+  .tool-grid { display:flex; align-items:center; flex-wrap:wrap; gap:8px; padding:14px 18px; }
+  .tool-pill { font-size:11px; font-weight:700; padding:5px 11px; border-radius:100px; border:1px solid; letter-spacing:0.02em; white-space:nowrap; }
+  .tp-orange { background:var(--orange-soft); color:var(--orange-dark); border-color:var(--orange-mid); }
+  .tp-amber  { background:var(--amber-soft);  color:var(--amber-dark);  border-color:var(--amber-mid); }
+  .tp-rose   { background:var(--rose-soft);   color:#9F1239;            border-color:var(--rose-mid); }
+  .tp-teal   { background:var(--teal-soft);   color:var(--teal);        border-color:var(--teal-mid); }
+  .tp-violet { background:var(--violet-soft); color:#5B21B6;            border-color:var(--violet-mid); }
+
+  /* ══ BATCH BOXES ══ */
+  .batch-pair { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .batch-box { border-radius:12px; padding:14px 16px; border:1px solid var(--line); }
+  .bb-a { background:linear-gradient(135deg,#FFF7ED 0%,#FDECD5 100%); border-color:var(--orange-mid); }
+  .bb-b { background:linear-gradient(135deg,#FFFBEB 0%,#FEF3C7 100%); border-color:var(--amber-mid); }
+  .batch-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px; }
+  .bl-a { color:var(--orange-dark); } .bl-b { color:var(--amber-dark); }
+  .batch-title { font-size:22px; font-weight:800; line-height:1; margin-bottom:10px; }
+  .bt-a { color:var(--orange); } .bt-b { color:var(--amber); }
+  .batch-item { font-size:12px; color:var(--ink-2); display:flex; align-items:center; gap:6px; padding:3px 0; }
+  .bi-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+  .bd-o { background:var(--orange); } .bd-a { background:var(--amber); }
+
+  /* ══ AI TOOLS BAND ══ */
+  .ai-band { background:linear-gradient(135deg,#EA580C 0%,#D97706 100%); border-radius:16px; padding:20px 24px; display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+  .ai-band-left { flex:1; min-width:200px; }
+  .ai-band-title { font-size:16px; font-weight:800; color:#fff; margin-bottom:4px; }
+  .ai-band-sub   { font-size:12px; color:rgba(255,255,255,0.75); }
+  .ai-band-tools { display:flex; gap:8px; flex-wrap:wrap; }
+  .ai-chip { background:rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.3); border-radius:100px; padding:6px 14px; font-size:12px; font-weight:700; color:#fff; white-space:nowrap; }
+
+  /* ══ INDUSTRIES ══ */
+  .industry-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:10px; }
+  .ind-card { background:var(--white); border:1px solid var(--line); border-radius:12px; padding:12px 14px; border-left:3px solid var(--orange); }
+  .ind-emo   { font-size:20px; margin-bottom:6px; }
+  .ind-title { font-size:12px; font-weight:800; color:var(--ink); margin-bottom:4px; }
+  .ind-desc  { font-size:11px; color:var(--ink-3); line-height:1.4; }
+
+  /* ══ PROJECTS ══ */
+  .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
+  .proj-card { background:var(--white); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .proj-badge { display:inline-block; font-size:9px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; padding:3px 8px; border-radius:100px; background:var(--orange-mid); color:var(--orange-dark); margin-bottom:8px; }
+  .proj-title { font-size:13px; font-weight:800; color:var(--ink); margin-bottom:5px; }
+  .proj-desc  { font-size:11.5px; color:var(--ink-3); line-height:1.45; }
+
+  /* ══ AUDIENCE GRID ══ */
+  .audience-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; }
+  .aud-card { background:var(--white); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+  .aud-who { display:flex; align-items:center; gap:10px; padding:12px 14px; border-bottom:1px solid var(--line); }
+  .ac-fresher  .aud-who { background:var(--orange-soft); }
+  .ac-pro      .aud-who { background:var(--amber-soft); }
+  .ac-engineer .aud-who { background:var(--teal-soft); }
+  .ac-domain   .aud-who { background:var(--rose-soft); }
+  .ac-ai       .aud-who { background:var(--violet-soft); }
+  .aud-avatar { width:32px; height:32px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:16px; }
+  .av-fresher  { background:var(--orange-mid); }
+  .av-pro      { background:var(--amber-mid); }
+  .av-engineer { background:rgba(15,118,110,0.2); }
+  .av-domain   { background:var(--rose-mid); }
+  .av-ai       { background:var(--violet-mid); }
+  .aud-persona { font-size:13px; font-weight:800; color:var(--ink); }
+  .aud-outcomes { padding:12px 14px; display:flex; flex-direction:column; gap:5px; }
+  .aud-out { font-size:11.5px; color:var(--ink-2); display:flex; align-items:flex-start; gap:7px; line-height:1.4; }
+  .aud-out-dot { width:5px; height:5px; border-radius:50%; flex-shrink:0; margin-top:5px; }
+  .odd-fresher  { background:var(--orange); }
+  .odd-pro      { background:var(--amber); }
+  .odd-engineer { background:var(--teal); }
+  .odd-domain   { background:var(--rose); }
+  .odd-ai       { background:var(--violet); }
+
+  /* ══ CAREER ROLES ══ */
+  .career-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .career-tier { background:var(--white); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+  .career-tier-head { padding:10px 14px; font-size:11px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; display:flex; align-items:center; gap:7px; }
+  .cth-entry    { background:var(--orange-soft); color:var(--orange-dark); border-bottom:1px solid var(--orange-mid); }
+  .cth-mid      { background:var(--amber-soft);  color:var(--amber-dark);  border-bottom:1px solid var(--amber-mid); }
+  .cth-advanced { background:var(--rose-soft);   color:#9F1239;            border-bottom:1px solid var(--rose-mid); }
+  .career-role-list { padding:10px 14px; display:flex; flex-direction:column; gap:5px; }
+  .career-role { font-size:12px; color:var(--ink-2); padding:5px 8px; background:var(--surface); border-radius:6px; border:1px solid var(--line); font-weight:500; }
+
+  /* ══ CERTIFICATES ══ */
+  .cert-wrap { background:var(--white); border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+  .cert-head { background:linear-gradient(135deg,var(--orange-soft) 0%,var(--amber-soft) 100%); border-bottom:1px solid var(--orange-mid); padding:14px 20px; display:flex; align-items:center; gap:12px; }
+  .cert-head-icon  { font-size:22px; }
+  .cert-head-title { font-size:15px; font-weight:800; color:var(--ink); }
+  .cert-head-sub   { font-size:11px; color:var(--ink-3); font-weight:600; margin-left:auto; }
+  .cert-body { padding:16px 20px; display:flex; gap:14px; flex-wrap:wrap; }
+  .cert-box { flex:1; min-width:200px; border-radius:12px; padding:14px 16px; display:flex; align-items:flex-start; gap:12px; border:1px solid var(--line); }
+  .cert-box-a { background:var(--orange-soft); border-color:var(--orange-mid); }
+  .cert-box-b { background:var(--amber-soft);  border-color:var(--amber-mid); }
+  .cert-seal { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+  .cs-a { background:var(--orange-mid); } .cs-b { background:var(--amber-mid); }
+  .cert-org  { font-size:10px; font-weight:800; color:var(--ink-3); text-transform:uppercase; letter-spacing:0.1em; }
+  .cert-name { font-size:13px; font-weight:800; color:var(--ink); margin:2px 0; }
+  .cert-note { font-size:11px; color:var(--ink-3); line-height:1.4; }
+
+  /* ══ USP BOXES ══ */
+  .usp-wrap { background:var(--white); border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+  .usp-head { background:linear-gradient(135deg,#EA580C 0%,#C2410C 100%); padding:14px 20px; display:flex; align-items:center; gap:12px; }
+  .usp-head-icon  { font-size:20px; }
+  .usp-head-title { font-size:15px; font-weight:800; color:#fff; }
+  .usp-head-sub   { font-size:11px; color:rgba(255,255,255,0.68); font-weight:600; margin-left:auto; }
+  .usp-body { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:0; }
+  .usp-box  { padding:16px 18px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .usp-box:nth-child(3n) { border-right:none; }
+  .usp-box-top  { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+  .usp-box-emo  { font-size:18px; }
+  .usp-box-title{ font-size:12px; font-weight:800; color:var(--ink); }
+  .usp-box-desc { font-size:11.5px; color:var(--ink-3); line-height:1.5; }
+
+  /* ══ FOOTER ══ */
+  .footer { display:flex; align-items:center; flex-wrap:wrap; gap:10px; padding-top:16px; border-top:1px solid var(--line); }
+  .footer-brand { font-size:14px; font-weight:800; color:var(--orange); letter-spacing:-0.01em; }
+  .footer-meta  { font-size:10px; font-weight:600; color:var(--ink-3); letter-spacing:0.1em; text-transform:uppercase; }
+  .footer-tags  { display:flex; gap:6px; flex-wrap:wrap; }
+  .ftag { font-size:10px; font-weight:700; padding:4px 10px; border-radius:100px; border:1px solid; letter-spacing:0.04em; }
+  .ftag-o { background:var(--orange-soft); color:var(--orange-dark); border-color:var(--orange-mid); }
+  .ftag-a { background:var(--amber-soft);  color:var(--amber-dark);  border-color:var(--amber-mid); }
+  .ftag-r { background:var(--rose-soft);   color:#9F1239;            border-color:var(--rose-mid); }
+  .ftag-t { background:var(--teal-soft);   color:var(--teal);        border-color:var(--teal-mid); }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-3);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .back-link:hover { color: var(--orange); }
+  .back-link:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; border-radius: 4px; }
+
+  /* ══ RESPONSIVE ══ */
+  @media (max-width:800px) {
+    .main-grid { grid-template-columns:1fr; }
+    .header { flex-direction:column; align-items:flex-start; }
+    .header-stats { justify-content:flex-start; }
+    .career-grid { grid-template-columns:1fr; }
+    .audience-grid { grid-template-columns:1fr; }
+    .cert-body { flex-direction:column; }
+    .ai-band { flex-direction:column; align-items:flex-start; }
+  }
+  @media (max-width:540px) {
+    .batch-pair { grid-template-columns:1fr; }
+    .kpi-strip  { grid-template-columns:repeat(2,1fr); }
+    .header-title { font-size:22px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <a class="back-link" href="index.html">← All products</a>
+
+  <!-- ── HEADER ── -->
+  <div class="header">
+    <div class="header-text">
+      <div class="header-eyebrow">Sales Reference · Internal Use Only</div>
+      <div class="header-title">AI Powered Business Analytics</div>
+      <div class="header-sub">GUVI – Business Analytics &nbsp;·&nbsp; Cohort 2026 &nbsp;·&nbsp; 24 Modules · 7 Projects · English &amp; Tamil</div>
+    </div>
+    <div class="header-stats">
+      <div class="hstat"><div class="hstat-num">24</div><div class="hstat-lbl">Modules</div></div>
+      <div class="hstat"><div class="hstat-num">120+</div><div class="hstat-lbl">Hours</div></div>
+      <div class="hstat"><div class="hstat-num">7</div><div class="hstat-lbl">Projects</div></div>
+      <div class="hstat"><div class="hstat-num">6</div><div class="hstat-lbl">Months</div></div>
+    </div>
+  </div>
+
+  <!-- ── KPI STRIP ── -->
+  <div class="kpi-strip">
+    <div class="kpi"><div class="kpi-num">6<span class="kpi-unit">mo</span></div><div class="kpi-lbl">Weekday Batch</div></div>
+    <div class="kpi"><div class="kpi-num">6<span class="kpi-unit">mo</span></div><div class="kpi-lbl">Weekend Batch</div></div>
+    <div class="kpi"><div class="kpi-num">24</div><div class="kpi-lbl">Modules</div></div>
+    <div class="kpi"><div class="kpi-num">7</div><div class="kpi-lbl">Real Projects</div></div>
+    <div class="kpi"><div class="kpi-num">2</div><div class="kpi-lbl">Certificates</div></div>
+  </div>
+
+  <!-- ── MAIN GRID ── -->
+  <div class="main-grid">
+
+    <!-- CURRICULUM ROADMAP -->
+    <div class="card">
+      <div class="card-head card-head-orange">
+        <div class="card-icon ci-orange">📚</div>
+        <span class="card-title">Curriculum Roadmap — 24 Modules</span>
+      </div>
+      <div class="card-body">
+        <div class="mod-list">
+
+          <div class="divider-banner db-orange">✦ Foundation — Modules 01–04</div>
+          <div class="mod-row">
+            <span class="mod-badge mb-orange">M01</span>
+            <span class="mod-name">Business &amp; Data Analytics Foundations</span>
+            <span class="mod-hrs">🏢</span>
+          </div>
+          <div class="mod-row">
+            <span class="mod-badge mb-orange">M02</span>
+            <span class="mod-name">Excel for Analytics — Dashboards &amp; Functions</span>
+            <span class="mod-hrs">📊</span>
+          </div>
+          <div class="mod-row">
+            <span class="mod-badge mb-orange">M03</span>
+            <span class="mod-name">SQL &amp; Data Modeling</span>
+            <span class="mod-hrs">🗄️</span>
+          </div>
+          <div class="mod-row">
+            <span class="mod-badge mb-orange">M04</span>
+            <span class="mod-name">Statistics for Business Decisions</span>
+            <span class="mod-hrs">📐</span>
+          </div>
+
+          <div class="divider-banner db-amber">📊 Visualization — Modules 05–07</div>
+          <div class="mod-row">
+            <span class="mod-badge mb-amber">M05</span>
+            <span class="mod-name em-amber">Power BI — DAX, KPIs &amp; AI Insights</span>
+            <span class="mod-hrs">⚡</span>
+          </div>
+          <div class="mod-row">
+            <span class="mod-badge mb-amber">M06</span>
+            <span class="mod-name em-amber">Tableau — Interactive Dashboards &amp; Forecasting</span>
+            <span class="mod-hrs">🎨</span>
+          </div>
+          <div class="mod-row">
+            <span class="mod-badge mb-amber">M07</span>
+            <span class="mod-name em-amber">Google Looker Studio — Real-Time Reporting</span>
+            <span class="mod-hrs">🔍</span>
+          </div>
+
+          <div class="divider-banner db-rose">🐍 Analytics with Code — Modules 08–09</div>
+          <div class="mod-row">
+            <span class="mod-badge mb-rose">M08</span>
+            <span class="mod-name em-rose">Python for Analytics — Pandas &amp; Automation</span>
+            <span class="mod-hrs">🐍</span>
+          </div>
+          <div class="mod-row">
+            <span class="mod-badge mb-rose">M09</span>
+            <span class="mod-name em-rose">Predictive Analytics — Regression &amp; Forecasting</span>
+            <span class="mod-hrs">🔮</span>
+          </div>
+
+          <div class="divider-banner db-teal">🤖 AI for Analytics — Modules 10–12</div>
+          <div class="mod-row">
+            <span class="mod-badge mb-teal">M10</span>
+            <span class="mod-name em-teal">AI Tools for Business — ChatGPT, Claude, Gemini</span>
+            <span class="mod-hrs">✨</span>
+          </div>
+          <div class="mod-row">
+            <span class="mod-badge mb-teal">M11</span>
+            <span class="mod-name em-teal">AI-Powered Reporting &amp; Insight Automation</span>
+            <span class="mod-hrs">🚀</span>
+          </div>
+          <div class="mod-row">
+            <span class="mod-badge mb-teal">M12</span>
+            <span class="mod-name em-teal">AI Agents &amp; No-Code Automation Workflows</span>
+            <span class="mod-hrs">🤖</span>
+          </div>
+
+          <div class="divider-banner db-violet">🏭 Domain Analytics — Modules 13–15</div>
+          <div class="mod-row">
+            <span class="mod-badge mb-violet">M13</span>
+            <span class="mod-name em-violet">Marketing &amp; Digital Marketing Analytics</span>
+            <span class="mod-hrs">📈</span>
+          </div>
+          <div class="mod-row">
+            <span class="mod-badge mb-violet">M14</span>
+            <span class="mod-name em-violet">E-Commerce &amp; Sales Analytics</span>
+            <span class="mod-hrs">🛒</span>
+          </div>
+          <div class="mod-row">
+            <span class="mod-badge mb-violet">M15</span>
+            <span class="mod-name em-violet">Finance, HR &amp; Healthcare Analytics</span>
+            <span class="mod-hrs">💼</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div style="display:flex; flex-direction:column; gap:16px;">
+
+      <!-- TOOLS COVERED -->
+      <div class="card">
+        <div class="card-head card-head-amber">
+          <div class="card-icon ci-amber">🛠️</div>
+          <span class="card-title">Key Tools &amp; Technologies</span>
+        </div>
+        <div class="tool-grid">
+          <span class="tool-pill tp-orange">Microsoft Excel</span>
+          <span class="tool-pill tp-orange">SQL</span>
+          <span class="tool-pill tp-orange">MySQL</span>
+          <span class="tool-pill tp-orange">PostgreSQL</span>
+          <span class="tool-pill tp-amber">Power BI</span>
+          <span class="tool-pill tp-amber">Tableau</span>
+          <span class="tool-pill tp-amber">Google Looker Studio</span>
+          <span class="tool-pill tp-amber">DAX</span>
+          <span class="tool-pill tp-rose">Python</span>
+          <span class="tool-pill tp-rose">Pandas</span>
+          <span class="tool-pill tp-rose">NumPy</span>
+          <span class="tool-pill tp-rose">Matplotlib</span>
+          <span class="tool-pill tp-rose">Seaborn</span>
+          <span class="tool-pill tp-rose">Scikit-Learn</span>
+          <span class="tool-pill tp-teal">ChatGPT</span>
+          <span class="tool-pill tp-teal">Google Gemini</span>
+          <span class="tool-pill tp-teal">Claude</span>
+          <span class="tool-pill tp-teal">AI Agents</span>
+          <span class="tool-pill tp-teal">No-Code Tools</span>
+        </div>
+      </div>
+
+      <!-- BATCH OPTIONS -->
+      <div class="card">
+        <div class="card-head card-head-rose">
+          <div class="card-icon ci-rose">📅</div>
+          <span class="card-title">Batch Options — Same Curriculum, Your Pace</span>
+        </div>
+        <div class="card-body">
+          <div class="batch-pair">
+            <div class="batch-box bb-a">
+              <div class="batch-label bl-a">Weekday Batch</div>
+              <div class="batch-title bt-a">6 Months</div>
+              <div class="batch-item"><span class="bi-dot bd-o"></span><strong>Mon – Fri</strong> · 1.5 hrs/day</div>
+              <div class="batch-item"><span class="bi-dot bd-o"></span>Full-time learners &amp; freshers</div>
+              <div class="batch-item"><span class="bi-dot bd-o"></span>Focused, structured pace</div>
+            </div>
+            <div class="batch-box bb-b">
+              <div class="batch-label bl-b">Weekend Batch</div>
+              <div class="batch-title bt-b">6 Months</div>
+              <div class="batch-item"><span class="bi-dot bd-a"></span><strong>Sat – Sun</strong> · 2.5 hrs/day</div>
+              <div class="batch-item"><span class="bi-dot bd-a"></span>Working professionals</div>
+              <div class="batch-item"><span class="bi-dot bd-a"></span>Flexible, no-pressure pace</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WHAT'S INCLUDED -->
+      <div class="card">
+        <div class="card-head card-head-teal">
+          <div class="card-icon ci-teal">✨</div>
+          <span class="card-title">What's Included</span>
+        </div>
+        <div class="card-body">
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-2);padding:5px 0;border-bottom:1px solid var(--line);">🤖 <strong>AI-First Analytics Curriculum</strong> — ChatGPT, Claude, Gemini &amp; AI Agents</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-2);padding:5px 0;border-bottom:1px solid var(--line);">📊 <strong>3 BI Tools Covered</strong> — Power BI, Tableau &amp; Google Looker Studio</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-2);padding:5px 0;border-bottom:1px solid var(--line);">🛠️ <strong>7 Real-time Projects</strong> — portfolio-ready across 7 industries</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-2);padding:5px 0;border-bottom:1px solid var(--line);">🎓 <strong>Industry-Led Mentorship</strong> — live sessions with analytics practitioners</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-2);padding:5px 0;border-bottom:1px solid var(--line);">🌐 <strong>2 Languages</strong> — English &amp; Tamil</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-2);padding:5px 0;">🤝 <strong>Placement Support</strong> — resume review, mock interviews &amp; job prep</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /RIGHT COL -->
+  </div><!-- /MAIN GRID -->
+
+  <!-- ── AI TOOLS BAND ── -->
+  <div class="ai-band">
+    <div class="ai-band-left">
+      <div class="ai-band-title">🤖 AI for Business Analytics — Go Beyond Traditional Reporting</div>
+      <div class="ai-band-sub">Generate insights · Automate reports · Build AI workflows · Create analytics assistants · Speed up decisions</div>
+    </div>
+    <div class="ai-band-tools">
+      <span class="ai-chip">ChatGPT</span>
+      <span class="ai-chip">Google Gemini</span>
+      <span class="ai-chip">Claude</span>
+      <span class="ai-chip">AI Agents</span>
+      <span class="ai-chip">No-Code Automation</span>
+    </div>
+  </div>
+
+  <!-- ── INDUSTRIES ── -->
+  <div>
+    <div class="sec-label">Industries Covered — Real-World Analytics Use Cases</div>
+    <div class="industry-grid">
+      <div class="ind-card">
+        <div class="ind-emo">📈</div>
+        <div class="ind-title">Marketing Analytics</div>
+        <div class="ind-desc">Campaign performance, customer acquisition &amp; ROI measurement</div>
+      </div>
+      <div class="ind-card">
+        <div class="ind-emo">💻</div>
+        <div class="ind-title">Digital Marketing Analytics</div>
+        <div class="ind-desc">SEO, social media, paid ads &amp; web performance metrics</div>
+      </div>
+      <div class="ind-card">
+        <div class="ind-emo">🛒</div>
+        <div class="ind-title">E-Commerce Analytics</div>
+        <div class="ind-desc">Customer journeys, conversion funnels &amp; retention</div>
+      </div>
+      <div class="ind-card">
+        <div class="ind-emo">💰</div>
+        <div class="ind-title">Finance Analytics</div>
+        <div class="ind-desc">Revenue, profitability, forecasting &amp; financial KPIs</div>
+      </div>
+      <div class="ind-card">
+        <div class="ind-emo">👥</div>
+        <div class="ind-title">HR Analytics</div>
+        <div class="ind-desc">Workforce trends, attrition, hiring &amp; engagement</div>
+      </div>
+      <div class="ind-card">
+        <div class="ind-emo">🚀</div>
+        <div class="ind-title">Sales Analytics</div>
+        <div class="ind-desc">Sales performance, revenue growth &amp; forecasting</div>
+      </div>
+      <div class="ind-card">
+        <div class="ind-emo">🏥</div>
+        <div class="ind-title">Healthcare Analytics</div>
+        <div class="ind-desc">Patient outcomes, operational efficiency &amp; decisions</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PROJECTS ── -->
+  <div>
+    <div class="sec-label">Portfolio Projects — Build What Recruiters Care About</div>
+    <div class="projects-grid">
+      <div class="proj-card">
+        <div class="proj-badge">Project 01</div>
+        <div class="proj-title">Retail Analytics Dashboard</div>
+        <div class="proj-desc">Transform raw sales data into actionable insights with interactive visualizations</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-badge">Project 02</div>
+        <div class="proj-title">Marketing Performance Analytics</div>
+        <div class="proj-desc">Track ROI, campaign performance, CAC, and conversion metrics end-to-end</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-badge">Project 03</div>
+        <div class="proj-title">Customer Segmentation Project</div>
+        <div class="proj-desc">Apply RFM Analysis and clustering techniques for targeted business strategy</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-badge">Project 04</div>
+        <div class="proj-title">Sales Analytics Dashboard</div>
+        <div class="proj-desc">Analyze revenue trends, performance gaps, and business growth opportunities</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-badge">Project 05</div>
+        <div class="proj-title">Healthcare Analytics Case Study</div>
+        <div class="proj-desc">Improve operational efficiency and outcomes using data-driven decisions</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CAREER OUTCOMES ── -->
+  <div>
+    <div class="sec-label">Career Opportunities After Completion</div>
+    <div class="career-grid">
+      <div class="career-tier">
+        <div class="career-tier-head cth-entry">🌱 Entry Level</div>
+        <div class="career-role-list">
+          <div class="career-role">Business Analyst</div>
+          <div class="career-role">Data Analyst</div>
+          <div class="career-role">Reporting Analyst</div>
+          <div class="career-role">MIS Analyst</div>
+        </div>
+      </div>
+      <div class="career-tier">
+        <div class="career-tier-head cth-mid">📈 Mid-Level</div>
+        <div class="career-role-list">
+          <div class="career-role">Senior Business Analyst</div>
+          <div class="career-role">Analytics Consultant</div>
+          <div class="career-role">Product Analyst</div>
+        </div>
+      </div>
+      <div class="career-tier">
+        <div class="career-tier-head cth-advanced">🏆 Advanced Roles</div>
+        <div class="career-role-list">
+          <div class="career-role">Analytics Manager</div>
+          <div class="career-role">Product Manager</div>
+          <div class="career-role">Head of Analytics</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── AUDIENCE ── -->
+  <div>
+    <div class="sec-label">Who Should Join?</div>
+    <div class="audience-grid">
+      <div class="aud-card ac-fresher">
+        <div class="aud-who">
+          <div class="aud-avatar av-fresher">🎓</div>
+          <div class="aud-persona">Freshers</div>
+        </div>
+        <div class="aud-outcomes">
+          <div class="aud-out"><span class="aud-out-dot odd-fresher"></span>Build a strong foundation and enter analytics roles confidently</div>
+          <div class="aud-out"><span class="aud-out-dot odd-fresher"></span>No prior analytics experience required</div>
+        </div>
+      </div>
+      <div class="aud-card ac-pro">
+        <div class="aud-who">
+          <div class="aud-avatar av-pro">💼</div>
+          <div class="aud-persona">Working Professionals</div>
+        </div>
+        <div class="aud-outcomes">
+          <div class="aud-out"><span class="aud-out-dot odd-pro"></span>Transition into analytics and data-driven careers</div>
+          <div class="aud-out"><span class="aud-out-dot odd-pro"></span>Weekend batch — upskill without quitting your job</div>
+        </div>
+      </div>
+      <div class="aud-card ac-engineer">
+        <div class="aud-who">
+          <div class="aud-avatar av-engineer">⚙️</div>
+          <div class="aud-persona">Engineers &amp; Graduates</div>
+        </div>
+        <div class="aud-outcomes">
+          <div class="aud-out"><span class="aud-out-dot odd-engineer"></span>Add highly valuable analytical skills to your profile</div>
+          <div class="aud-out"><span class="aud-out-dot odd-engineer"></span>Combine technical skills with business intelligence</div>
+        </div>
+      </div>
+      <div class="aud-card ac-domain">
+        <div class="aud-who">
+          <div class="aud-avatar av-domain">📊</div>
+          <div class="aud-persona">Marketing, Sales, HR &amp; Finance</div>
+        </div>
+        <div class="aud-outcomes">
+          <div class="aud-out"><span class="aud-out-dot odd-domain"></span>Use analytics to improve business outcomes and career growth</div>
+          <div class="aud-out"><span class="aud-out-dot odd-domain"></span>Leverage AI tools to automate domain reporting</div>
+        </div>
+      </div>
+      <div class="aud-card ac-ai">
+        <div class="aud-who">
+          <div class="aud-avatar av-ai">🤖</div>
+          <div class="aud-persona">Anyone Interested in AI + Analytics</div>
+        </div>
+        <div class="aud-outcomes">
+          <div class="aud-out"><span class="aud-out-dot odd-ai"></span>No coding background required to get started</div>
+          <div class="aud-out"><span class="aud-out-dot odd-ai"></span>Learn AI tools like ChatGPT &amp; Claude for business decisions</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── USPs ── -->
+  <div>
+    <div class="sec-label">Why This Program Stands Out</div>
+    <div class="usp-wrap">
+      <div class="usp-head">
+        <div class="usp-head-icon">⭐</div>
+        <div class="usp-head-title">Key Differentiators</div>
+        <div class="usp-head-sub">8 Reasons Learners Choose This Program</div>
+      </div>
+      <div class="usp-body">
+        <div class="usp-box">
+          <div class="usp-box-top"><div class="usp-box-emo">🤖</div><div class="usp-box-title">AI-First Analytics Curriculum</div></div>
+          <div class="usp-box-desc">ChatGPT, Claude, Gemini &amp; AI Agents are core modules — automate analytics and generate insights with AI.</div>
+        </div>
+        <div class="usp-box">
+          <div class="usp-box-top"><div class="usp-box-emo">📊</div><div class="usp-box-title">3 BI Tools in One Program</div></div>
+          <div class="usp-box-desc">Power BI, Tableau &amp; Google Looker Studio — the three most in-demand visualization platforms, all covered end-to-end.</div>
+        </div>
+        <div class="usp-box">
+          <div class="usp-box-top"><div class="usp-box-emo">🏢</div><div class="usp-box-title">Business-Focused Approach</div></div>
+          <div class="usp-box-desc">Every module ties to real business decisions — marketing ROI, financial forecasting, HR attrition, and more.</div>
+        </div>
+        <div class="usp-box">
+          <div class="usp-box-top"><div class="usp-box-emo">🏭</div><div class="usp-box-title">7 Industry Verticals Covered</div></div>
+          <div class="usp-box-desc">Marketing, E-Commerce, Finance, HR, Sales, Healthcare &amp; Digital — the broadest industry coverage available.</div>
+        </div>
+        <div class="usp-box">
+          <div class="usp-box-top"><div class="usp-box-emo">🛠️</div><div class="usp-box-title">5 Real-World Projects</div></div>
+          <div class="usp-box-desc">Retail dashboard, marketing analytics, customer segmentation, sales reporting, healthcare case study — a complete portfolio.</div>
+        </div>
+        <div class="usp-box">
+          <div class="usp-box-top"><div class="usp-box-emo">🔮</div><div class="usp-box-title">Predictive Analytics Included</div></div>
+          <div class="usp-box-desc">Regression models, ML basics &amp; forecasting — go beyond descriptive analytics into prediction and business intelligence.</div>
+        </div>
+        <div class="usp-box">
+          <div class="usp-box-top"><div class="usp-box-emo">🌐</div><div class="usp-box-title">No Coding Background Needed</div></div>
+          <div class="usp-box-desc">Designed for business professionals — start from zero, build up to Python, SQL &amp; AI-powered analytics workflows.</div>
+        </div>
+        <div class="usp-box">
+          <div class="usp-box-top"><div class="usp-box-emo">🤝</div><div class="usp-box-title">Career &amp; Placement Support</div></div>
+          <div class="usp-box-desc">Mock interviews, resume review &amp; portfolio guidance — end-to-end support from learning to landing your analytics role.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CERTIFICATES ── -->
+  <div>
+    <div class="sec-label">Certificates — What Learners Receive</div>
+    <div class="cert-wrap">
+      <div class="cert-head">
+        <div class="cert-head-icon">🎓</div>
+        <div class="cert-head-title">Certificates Upon Completion</div>
+        <div class="cert-head-sub">2 Recognised Certificates</div>
+      </div>
+      <div class="cert-body">
+        <div class="cert-box cert-box-a">
+          <div class="cert-seal cs-a">💼</div>
+          <div class="cert-info">
+            <div class="cert-org">HCL · GUVI</div>
+            <div class="cert-name">HCL GUVI Certificate</div>
+            <div class="cert-note">Industry-recognised certificate from HCL &amp; GUVI platform</div>
+          </div>
+        </div>
+        <div class="cert-box cert-box-b">
+          <div class="cert-seal cs-b">🇮🇳</div>
+          <div class="cert-info">
+            <div class="cert-org">NSDC</div>
+            <div class="cert-name">NSDC Certificate</div>
+            <div class="cert-note">National Skill Development Corporation — government-backed certification</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="footer">
+    <div class="footer-brand">AI Powered Business Analytics — GUVI 2026</div>
+    <div class="footer-meta">Sales Reference · Internal Use Only</div>
+    <div class="footer-tags">
+      <span class="ftag ftag-o">AI-First</span>
+      <span class="ftag ftag-a">3 BI Tools</span>
+      <span class="ftag ftag-r">7 Industries</span>
+      <span class="ftag ftag-t">Job-Ready Outcome</span>
+    </div>
+  </div>
+
+</div><!-- /WRAPPER -->
+</body>
+</html>
