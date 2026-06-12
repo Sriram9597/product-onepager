@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI-Powered UI/UX & Product Design Fellowship — GUVI 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    /* Atlassian-inspired palette */
+    --brand:        #0052CC;
+    --brand-dark:   #0747A6;
+    --brand-mid:    #2684FF;
+    --brand-soft:   #DEEBFF;
+    --brand-xsoft:  #F4F7FF;
+
+    --teal:         #00875A;
+    --teal-soft:    #E3FCEF;
+    --teal-mid:     #ABF5D1;
+
+    --slate:        #253858;
+    --slate-2:      #42526E;
+    --slate-3:      #6B778C;
+    --slate-4:      #97A0AF;
+
+    --amber:        #FF8B00;
+    --amber-soft:   #FFFAE6;
+    --amber-mid:    #FFE380;
+
+    --purple:       #5243AA;
+    --purple-soft:  #EAE6FF;
+    --purple-mid:   #C0B6F2;
+
+    --line:         #DFE1E6;
+    --line-soft:    #EBECF0;
+    --surface:      #F4F5F7;
+    --white:        #FFFFFF;
+    --ink:          #172B4D;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--surface);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrapper {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 28px 20px 52px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  /* ══ HEADER ══ */
+  .header {
+    background: var(--brand-dark);
+    border-radius: 14px;
+    padding: 30px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    pointer-events: none;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    bottom: -50px; left: 35%;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+    pointer-events: none;
+  }
+  /* subtle grid lines */
+  .header-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  .header-text { position: relative; z-index: 1; }
+  .header-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .header-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 20px; height: 2px;
+    background: var(--brand-mid);
+    border-radius: 2px;
+  }
+  .header-title {
+    font-size: clamp(21px, 3vw, 32px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  .header-title span { color: #4C9AFF; }
+  .header-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 8px;
+    font-weight: 400;
+    display: flex; align-items: center; gap: 10px;
+    flex-wrap: wrap;
+  }
+  .header-sub-dot { width: 3px; height: 3px; background: rgba(255,255,255,0.3); border-radius: 50%; }
+  .header-stats {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .hstat {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 12px 18px;
+    text-align: center;
+    min-width: 76px;
+  }
+  .hstat-num {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .hstat-lbl {
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--slate-3);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .back-link:hover { color: var(--brand); }
+  .back-link:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 4px; }
+
+  /* ══ KPI STRIP ══ */
+  .kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+  .kpi {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    border-left: 3px solid var(--brand);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .kpi-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .kpi-num {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--brand);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .kpi-unit { font-size: 13px; font-weight: 600; color: var(--brand); }
+  .kpi-lbl {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--slate-3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 2px;
+  }
+
+  /* ══ SECTION LABEL ══ */
+  .sec-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--slate-3);
+    margin-bottom: 12px;
+  }
+  .sec-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+  /* ══ MAIN GRID ══ */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  /* ══ CARD ══ */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .card-head {
+    padding: 13px 18px;
+    border-bottom: 1px solid var(--line-soft);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-head-brand  { background: var(--brand-xsoft); border-bottom-color: var(--brand-soft); }
+  .card-head-green  { background: var(--teal-soft);   border-bottom-color: var(--teal-mid); }
+  .card-head-amber  { background: var(--amber-soft);  border-bottom-color: var(--amber-mid); }
+  .card-head-purple { background: var(--purple-soft); border-bottom-color: var(--purple-mid); }
+  .card-head-slate  { background: var(--surface);     border-bottom-color: var(--line); }
+
+  .card-icon {
+    width: 26px; height: 26px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; flex-shrink: 0;
+  }
+  .ci-brand  { background: var(--brand); }
+  .ci-green  { background: var(--teal); }
+  .ci-amber  { background: var(--amber); }
+  .ci-purple { background: var(--purple); }
+  .ci-slate  { background: var(--slate); }
+
+  .card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .card-body { padding: 14px 16px; }
+
+  /* ══ MODULE ROWS ══ */
+  .mod-group { margin-bottom: 6px; }
+  .mod-phase-label {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .mpl-brand  { background: var(--brand-soft);  color: var(--brand-dark); }
+  .mpl-teal   { background: var(--teal-soft);   color: var(--teal); }
+  .mpl-purple { background: var(--purple-soft); color: var(--purple); }
+  .mpl-amber  { background: var(--amber-soft);  color: #974F00; }
+
+  .mod-item {
+    border: 1px solid var(--line-soft);
+    border-radius: 8px;
+    background: var(--surface);
+    margin-bottom: 5px;
+    overflow: hidden;
+  }
+  .mod-row {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+  }
+  .mod-badge {
+    font-size: 8.5px;
+    font-weight: 700;
+    padding: 3px 4px;
+    border-radius: 4px;
+    text-align: center;
+    letter-spacing: 0.03em;
+    font-family: 'DM Mono', monospace;
+  }
+  .mb-brand  { background: var(--brand-soft);  color: var(--brand-dark); }
+  .mb-teal   { background: var(--teal-soft);   color: var(--teal); }
+  .mb-purple { background: var(--purple-soft); color: var(--purple); }
+  .mb-amber  { background: var(--amber-soft);  color: #974F00; }
+
+  .mod-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--slate-2);
+    line-height: 1.35;
+  }
+  .mod-name strong { color: var(--ink); font-weight: 600; }
+
+  /* Module detail: tools + project */
+  .mod-detail {
+    padding: 0 10px 10px 54px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .mod-tools-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .mod-tool-chip {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--brand-xsoft);
+    border: 1px solid var(--brand-soft);
+    color: var(--brand-dark);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.01em;
+  }
+  .mod-tool-chip.tc-teal   { background: var(--teal-soft);   border-color: var(--teal-mid);   color: var(--teal); }
+  .mod-tool-chip.tc-purple { background: var(--purple-soft); border-color: var(--purple-mid); color: var(--purple); }
+  .mod-tool-chip.tc-amber  { background: var(--amber-soft);  border-color: var(--amber-mid);  color: #974F00; }
+  .mod-tool-chip.tc-slate  { background: var(--surface);     border-color: var(--line);       color: var(--slate-2); }
+
+  .mod-project-box {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 7px 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+  }
+  .mpb-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brand);
+    background: var(--brand-soft);
+    border-radius: 3px;
+    padding: 2px 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .mpb-text {
+    font-size: 11px;
+    color: var(--slate-2);
+    line-height: 1.45;
+  }
+
+  /* ══ TOOLS PILLS ══ */
+  .tool-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 12px 16px;
+  }
+  .tool-pill {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--slate-2);
+    font-family: 'DM Mono', monospace;
+  }
+  .tool-pill.tp-brand  { background: var(--brand-xsoft); border-color: var(--brand-soft); color: var(--brand-dark); }
+  .tool-pill.tp-teal   { background: var(--teal-soft);   border-color: var(--teal-mid);   color: var(--teal); }
+  .tool-pill.tp-purple { background: var(--purple-soft); border-color: var(--purple-mid); color: var(--purple); }
+  .tool-pill.tp-amber  { background: var(--amber-soft);  border-color: var(--amber-mid);  color: #974F00; }
+
+  /* ══ BATCH ══ */
+  .batch-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .batch-box {
+    border-radius: 8px;
+    padding: 14px;
+    border: 1px solid;
+  }
+  .bb-a { background: var(--brand-xsoft); border-color: var(--brand-soft); }
+  .bb-b { background: var(--teal-soft);   border-color: var(--teal-mid); }
+  .batch-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .bl-a { color: var(--brand-dark); }
+  .bl-b { color: var(--teal); }
+  .batch-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .bt-a { color: var(--brand); }
+  .bt-b { color: var(--teal); }
+  .batch-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    color: var(--slate-2);
+    padding: 3px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .batch-item:last-child { border-bottom: none; }
+  .bi-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .bd-b { background: var(--brand); }
+  .bd-g { background: var(--teal); }
+
+  /* ══ PROJECTS GRID ══ */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .proj-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .proj-card-head {
+    padding: 9px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .proj-num {
+    font-size: 9px;
+    font-weight: 700;
+    font-family: 'DM Mono', monospace;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: var(--brand-soft);
+    color: var(--brand-dark);
+    letter-spacing: 0.04em;
+  }
+  .proj-mod {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--slate-3);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .proj-card-body {
+    padding: 10px 12px;
+  }
+  .proj-title {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 5px;
+  }
+  .proj-desc {
+    font-size: 10.5px;
+    color: var(--slate-3);
+    line-height: 1.5;
+  }
+
+  /* ══ AUDIENCE ══ */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .aud-card {
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid;
+    background: var(--white);
+  }
+  .ac-fresher { border-color: var(--brand-soft);  }
+  .ac-pro     { border-color: var(--teal-mid);    }
+  .ac-dev     { border-color: var(--purple-mid);  }
+
+  .aud-who {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .aud-avatar {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .av-fresher { background: var(--brand-soft); }
+  .av-pro     { background: var(--teal-soft); }
+  .av-dev     { background: var(--purple-soft); }
+
+  .aud-persona {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .aud-outcomes { display: flex; flex-direction: column; gap: 5px; }
+  .aud-out {
+    display: flex;
+    gap: 7px;
+    align-items: flex-start;
+    font-size: 11.5px;
+    color: var(--slate-2);
+    line-height: 1.45;
+  }
+  .aud-out-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+  .odd-fresher { background: var(--brand); }
+  .odd-pro     { background: var(--teal); }
+  .odd-dev     { background: var(--purple); }
+
+  /* ══ CERTS ══ */
+  .cert-wrap {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .cert-head {
+    background: var(--slate);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cert-head-icon {
+    width: 28px; height: 28px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+  }
+  .cert-head-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+  .cert-head-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    margin-left: auto;
+    font-weight: 500;
+  }
+  .cert-body {
+    padding: 18px 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .cert-box {
+    border-radius: 10px;
+    padding: 14px;
+    border: 1px solid;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .cert-box-b { background: #F0F4FF; border-color: #B3C6FF; }
+  .cert-box-c { background: var(--teal-soft); border-color: var(--teal-mid); }
+  .cert-seal {
+    width: 36px; height: 36px;
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .cs-b { background: #3B5BDB; }
+  .cs-c { background: var(--teal); }
+  .cert-org {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--slate-3);
+    margin-bottom: 3px;
+  }
+  .cert-name {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+  .cert-note {
+    font-size: 10.5px;
+    color: var(--slate-3);
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+
+  /* ══ USPs ══ */
+  .usp-wrap {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .usp-head {
+    background: var(--brand);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .usp-head-icon {
+    width: 28px; height: 28px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+  }
+  .usp-head-title {
+    font-size: 14px; font-weight: 700; color: #fff; letter-spacing: -0.01em;
+  }
+  .usp-head-sub {
+    font-size: 11px; color: rgba(255,255,255,0.65); margin-left: auto; font-weight: 500;
+  }
+  .usp-body {
+    padding: 18px 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .usp-box {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    position: relative;
+  }
+  .usp-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--brand);
+    border-radius: 8px 8px 0 0;
+  }
+  .usp-box-top { display: flex; align-items: center; gap: 8px; }
+  .usp-box-emo {
+    width: 30px; height: 30px;
+    background: var(--brand-xsoft);
+    border: 1px solid var(--brand-soft);
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0;
+  }
+  .usp-box-title {
+    font-size: 12px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; line-height: 1.3;
+  }
+  .usp-box-desc {
+    font-size: 10.5px; color: var(--slate-3); line-height: 1.55; padding-top: 2px; border-top: 1px solid var(--line);
+  }
+
+  /* ══ PRICING ══ */
+  .pricing-band {
+    background: var(--brand-dark);
+    border-radius: 12px;
+    padding: 22px 28px;
+    display: grid;
+    grid-template-columns: auto 1px auto;
+    align-items: center;
+    gap: 0 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .pricing-band::after {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    pointer-events: none;
+  }
+  .pricing-band-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 36px 36px;
+    pointer-events: none;
+  }
+  .pricing-label {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55); margin-bottom: 5px;
+  }
+  .pricing-amount {
+    font-size: 38px; font-weight: 700; color: #fff; line-height: 1; letter-spacing: -0.03em;
+  }
+  .pricing-note { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 5px; }
+  .pricing-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 5px;
+    font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.85);
+    padding: 3px 10px; margin-top: 7px; letter-spacing: 0.04em;
+  }
+  .pricing-divider {
+    width: 1px; background: rgba(255,255,255,0.18); align-self: stretch;
+  }
+
+  /* ══ FOOTER ══ */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .footer-brand { font-size: 13px; font-weight: 700; color: var(--brand); letter-spacing: -0.01em; }
+  .footer-meta { font-size: 10px; font-weight: 500; color: var(--slate-3); letter-spacing: 0.08em; text-transform: uppercase; }
+  .footer-tags { display: flex; gap: 6px; }
+  .ftag {
+    font-size: 10px; font-weight: 600; padding: 3px 10px;
+    border-radius: 5px; border: 1px solid; letter-spacing: 0.03em;
+  }
+  .ftag-b { background: var(--brand-xsoft); color: var(--brand-dark); border-color: var(--brand-soft); }
+  .ftag-g { background: var(--teal-soft);   color: var(--teal);       border-color: var(--teal-mid); }
+  .ftag-p { background: var(--purple-soft); color: var(--purple);     border-color: var(--purple-mid); }
+  .ftag-s { background: var(--surface);     color: var(--slate-2);    border-color: var(--line); }
+
+  /* ══ WHAT'S INCLUDED ROWS ══ */
+  .included-row {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 12px; color: var(--slate-2);
+    padding: 6px 0; border-bottom: 1px solid var(--line-soft);
+  }
+  .included-row:last-child { border-bottom: none; }
+  .included-icon {
+    width: 26px; height: 26px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; flex-shrink: 0;
+  }
+
+  /* ══ RESPONSIVE ══ */
+  @media (max-width: 900px) {
+    .main-grid { grid-template-columns: 1fr; }
+    .header { flex-direction: column; align-items: flex-start; }
+    .header-stats { justify-content: flex-start; }
+    .kpi-strip { grid-template-columns: repeat(3, 1fr); }
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    .audience-grid { grid-template-columns: 1fr; }
+    .usp-body { grid-template-columns: repeat(2, 1fr); }
+    .pricing-band { grid-template-columns: 1fr; gap: 14px; }
+    .pricing-divider { display: none; }
+  }
+  @media (max-width: 600px) {
+    .batch-pair { grid-template-columns: 1fr; }
+    .kpi-strip  { grid-template-columns: repeat(2, 1fr); }
+    .projects-grid { grid-template-columns: 1fr; }
+    .cert-body  { grid-template-columns: 1fr; }
+    .usp-body   { grid-template-columns: 1fr; }
+    .header-title { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <a class="back-link" href="index.html">← All products</a>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-grid"></div>
+    <div class="header-text">
+      <div class="header-eyebrow">Sales Reference · Internal Use Only</div>
+      <div class="header-title">AI-Powered <span>UI/UX &amp; Product Design</span><br>Fellowship Programme</div>
+      <div class="header-sub">
+        GUVI Design
+        <span class="header-sub-dot"></span>
+        Cohort 2026
+        <span class="header-sub-dot"></span>
+        8 Modules
+        <span class="header-sub-dot"></span>
+        150+ Hrs
+        <span class="header-sub-dot"></span>
+        8 Industry Projects
+      </div>
+    </div>
+    <div class="header-stats">
+      <div class="hstat"><div class="hstat-num">8</div><div class="hstat-lbl">Modules</div></div>
+      <div class="hstat"><div class="hstat-num">150+</div><div class="hstat-lbl">Hours</div></div>
+      <div class="hstat"><div class="hstat-num">8</div><div class="hstat-lbl">Projects</div></div>
+    </div>
+  </div>
+
+  <!-- KPI STRIP -->
+  <div class="kpi-strip">
+    <div class="kpi"><div class="kpi-icon">📅</div><div><div class="kpi-num">4<span class="kpi-unit">mo</span></div><div class="kpi-lbl">Weekday Batch</div></div></div>
+    <div class="kpi"><div class="kpi-icon">🗓️</div><div><div class="kpi-num">6<span class="kpi-unit">mo</span></div><div class="kpi-lbl">Weekend Batch</div></div></div>
+    <div class="kpi"><div class="kpi-icon">🗂️</div><div><div class="kpi-num">8</div><div class="kpi-lbl">Real Projects</div></div></div>
+    <div class="kpi"><div class="kpi-icon">🤖</div><div><div class="kpi-num">AI</div><div class="kpi-lbl">Powered Learning</div></div></div>
+    <div class="kpi"><div class="kpi-icon">🚀</div><div><div class="kpi-num">Live</div><div class="kpi-lbl">MVP Deployment</div></div></div>
+  </div>
+
+  <!-- MAIN GRID: Curriculum + Right Col -->
+  <div class="main-grid">
+
+    <!-- CURRICULUM ROADMAP -->
+    <div class="card">
+      <div class="card-head card-head-brand">
+        <div class="card-icon ci-brand">🎨</div>
+        <span class="card-title">Curriculum Roadmap — 8 Modules with Tools &amp; Projects</span>
+      </div>
+      <div class="card-body">
+
+        <!-- Phase 1 -->
+        <div class="mod-group">
+          <div class="mod-phase-label mpl-brand">✦ Design Foundations — M01–M02</div>
+
+          <div class="mod-item">
+            <div class="mod-row">
+              <span class="mod-badge mb-brand">M01</span>
+              <span class="mod-name"><strong>Visual Design Mastery</strong> — Figma, Typography, Color Theory</span>
+            </div>
+            <div class="mod-detail">
+              <div class="mod-tools-row">
+                <span class="mod-tool-chip">Figma</span>
+                <span class="mod-tool-chip">Auto Layout</span>
+                <span class="mod-tool-chip">Components</span>
+                <span class="mod-tool-chip">Variants</span>
+                <span class="mod-tool-chip">Wireframing</span>
+                <span class="mod-tool-chip">Prototyping</span>
+              </div>
+              <div class="mod-project-box">
+                <span class="mpb-label">P01</span>
+                <span class="mpb-text"><strong>30 Days × 30 Screens</strong> — Dribbble-style UI challenge with full process documentation uploaded publicly</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mod-item">
+            <div class="mod-row">
+              <span class="mod-badge mb-brand">M02</span>
+              <span class="mod-name"><strong>Experience Design Mastery</strong> — UX Research, Design Thinking, Double Diamond</span>
+            </div>
+            <div class="mod-detail">
+              <div class="mod-tools-row">
+                <span class="mod-tool-chip tc-slate">Usability Testing</span>
+                <span class="mod-tool-chip tc-slate">UX Audit</span>
+                <span class="mod-tool-chip tc-slate">Info Architecture</span>
+                <span class="mod-tool-chip tc-slate">User Flows</span>
+              </div>
+              <div class="mod-project-box">
+                <span class="mpb-label">P02</span>
+                <span class="mpb-text"><strong>UX Research &amp; Audit</strong> — Conduct usability testing using multiple research methods &amp; perform a structured UX audit on Swiggy / Zomato</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="mod-group">
+          <div class="mod-phase-label mpl-teal">⚙ Design Systems &amp; AI — M03–M04</div>
+
+          <div class="mod-item">
+            <div class="mod-row">
+              <span class="mod-badge mb-teal">M03</span>
+              <span class="mod-name"><strong>Design System Masterclass</strong> — Atomic Design, Tokens, Dev Handoff</span>
+            </div>
+            <div class="mod-detail">
+              <div class="mod-tools-row">
+                <span class="mod-tool-chip tc-teal">Atomic Design</span>
+                <span class="mod-tool-chip tc-teal">Design Tokens</span>
+                <span class="mod-tool-chip tc-teal">Color Systems</span>
+                <span class="mod-tool-chip tc-teal">Typography Scale</span>
+                <span class="mod-tool-chip tc-teal">Spacing Systems</span>
+              </div>
+              <div class="mod-project-box">
+                <span class="mpb-label">P03</span>
+                <span class="mpb-text"><strong>Mini Design System</strong> — Build a complete design system for an application including web &amp; mobile versions</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mod-item">
+            <div class="mod-row">
+              <span class="mod-badge mb-teal">M04</span>
+              <span class="mod-name"><strong>AI for Designers</strong> — LLMs, Prompt Engineering, AI Research &amp; Personas</span>
+            </div>
+            <div class="mod-detail">
+              <div class="mod-tools-row">
+                <span class="mod-tool-chip tc-teal">ChatGPT / LLMs</span>
+                <span class="mod-tool-chip tc-teal">Prompt Engineering</span>
+                <span class="mod-tool-chip tc-teal">UX Writing AI</span>
+                <span class="mod-tool-chip tc-teal">AI Persona Analysis</span>
+              </div>
+              <div class="mod-project-box">
+                <span class="mpb-label">P04</span>
+                <span class="mpb-text"><strong>AI-Powered UX Report</strong> — Use AI tools to optimize an existing app's UX (Meesho / Myntra) &amp; generate a structured product improvement report</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="mod-group">
+          <div class="mod-phase-label mpl-purple">💡 Product Strategy — M05–M06</div>
+
+          <div class="mod-item">
+            <div class="mod-row">
+              <span class="mod-badge mb-purple">M05</span>
+              <span class="mod-name"><strong>Design vs Business</strong> — Revenue Models, Product Market Fit, Design Trade-offs</span>
+            </div>
+            <div class="mod-detail">
+              <div class="mod-tools-row">
+                <span class="mod-tool-chip tc-purple">Product Positioning</span>
+                <span class="mod-tool-chip tc-purple">PMF Framework</span>
+                <span class="mod-tool-chip tc-purple">Revenue Models</span>
+              </div>
+              <div class="mod-project-box">
+                <span class="mpb-label">P05</span>
+                <span class="mpb-text"><strong>Business Product Document</strong> — Conduct a field study &amp; prepare a detailed business-oriented product document explaining strategy &amp; revenue model</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mod-item">
+            <div class="mod-row">
+              <span class="mod-badge mb-purple">M06</span>
+              <span class="mod-name"><strong>Let's Design a Product</strong> — End-to-End Product Design &amp; Industry Case Study</span>
+            </div>
+            <div class="mod-detail">
+              <div class="mod-tools-row">
+                <span class="mod-tool-chip tc-purple">User Research</span>
+                <span class="mod-tool-chip tc-purple">Synthesis</span>
+                <span class="mod-tool-chip tc-purple">Ideation</span>
+                <span class="mod-tool-chip tc-purple">Figma Prototyping</span>
+                <span class="mod-tool-chip tc-purple">Usability Testing</span>
+              </div>
+              <div class="mod-project-box">
+                <span class="mpb-label">P06</span>
+                <span class="mpb-text"><strong>Industry Case Study</strong> — Design a full industry-level product including research documentation &amp; create a complete case study</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="mod-group">
+          <div class="mod-phase-label mpl-amber">🏆 Presentation &amp; Launch — M07–M08</div>
+
+          <div class="mod-item">
+            <div class="mod-row">
+              <span class="mod-badge mb-amber">M07</span>
+              <span class="mod-name"><strong>Presentation &amp; Storytelling</strong> — Case Study Narrative, Pitch Deck, Mock Panel</span>
+            </div>
+            <div class="mod-detail">
+              <div class="mod-tools-row">
+                <span class="mod-tool-chip tc-amber">Case Study Framework</span>
+                <span class="mod-tool-chip tc-amber">Pitch Deck</span>
+                <span class="mod-tool-chip tc-amber">Design Defense</span>
+                <span class="mod-tool-chip tc-amber">Voice Presentation</span>
+              </div>
+              <div class="mod-project-box">
+                <span class="mpb-label">P07</span>
+                <span class="mpb-text"><strong>Expert Panel Presentation</strong> — Create an industry-standard presentation deck &amp; present in a live mock expert panel session</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mod-item">
+            <div class="mod-row">
+              <span class="mod-badge mb-amber">M08</span>
+              <span class="mod-name"><strong>Building a Live Application</strong> — No-Code, Framer, Lovable AI, MVP Deployment</span>
+            </div>
+            <div class="mod-detail">
+              <div class="mod-tools-row">
+                <span class="mod-tool-chip tc-amber">Framer</span>
+                <span class="mod-tool-chip tc-amber">Lovable AI</span>
+                <span class="mod-tool-chip tc-amber">API Basics</span>
+                <span class="mod-tool-chip tc-amber">MVP Deployment</span>
+                <span class="mod-tool-chip tc-amber">V1 Release Strategy</span>
+              </div>
+              <div class="mod-project-box">
+                <span class="mpb-label">P08</span>
+                <span class="mpb-text"><strong>Live MVP Product</strong> — Design &amp; develop a landing page + multi-page MVP using Framer or Lovable AI and deploy it live</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /curriculum -->
+
+    <!-- RIGHT COLUMN -->
+    <div style="display:flex; flex-direction:column; gap:16px;">
+
+      <!-- BATCH OPTIONS -->
+      <div class="card">
+        <div class="card-head card-head-green">
+          <div class="card-icon ci-green">📅</div>
+          <span class="card-title">Batch Options — Same Curriculum, Your Pace</span>
+        </div>
+        <div class="card-body">
+          <div class="batch-pair">
+            <div class="batch-box bb-a">
+              <div class="batch-label bl-a">Weekday Batch</div>
+              <div class="batch-title bt-a">4 Months</div>
+              <div class="batch-item"><span class="bi-dot bd-b"></span><strong>Mon – Thu</strong> · 4 days/week</div>
+              <div class="batch-item"><span class="bi-dot bd-b"></span>Full-time learners &amp; freshers</div>
+              <div class="batch-item"><span class="bi-dot bd-b"></span>Faster, focused pace</div>
+            </div>
+            <div class="batch-box bb-b">
+              <div class="batch-label bl-b">Weekend Batch</div>
+              <div class="batch-title bt-b">6 Months</div>
+              <div class="batch-item"><span class="bi-dot bd-g"></span><strong>Sat – Sun</strong> · 2 days/week</div>
+              <div class="batch-item"><span class="bi-dot bd-g"></span>Working professionals</div>
+              <div class="batch-item"><span class="bi-dot bd-g"></span>Relaxed, no-pressure pace</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WHAT'S INCLUDED -->
+      <div class="card">
+        <div class="card-head card-head-amber">
+          <div class="card-icon ci-amber">✨</div>
+          <span class="card-title">What's Included</span>
+        </div>
+        <div class="card-body" style="padding:10px 14px;">
+          <div class="included-row"><div class="included-icon" style="background:var(--brand-xsoft)">🎨</div><div><strong>30 Days × 30 Screens</strong> — Dribbble-style UI challenge in M01</div></div>
+          <div class="included-row"><div class="included-icon" style="background:var(--teal-soft)">🤖</div><div><strong>AI-Powered Workflow</strong> — LLMs, prompt engineering &amp; AI research</div></div>
+          <div class="included-row"><div class="included-icon" style="background:var(--purple-soft)">🗂️</div><div><strong>8 Industry Projects</strong> — portfolio-ready case studies</div></div>
+          <div class="included-row"><div class="included-icon" style="background:var(--amber-soft)">🌐</div><div><strong>Live MVP Deployment</strong> — real product shipped via Framer / Lovable AI</div></div>
+          <div class="included-row"><div class="included-icon" style="background:var(--teal-soft)">🎤</div><div><strong>Mock Expert Panel</strong> — present to industry reviewers</div></div>
+          <div class="included-row"><div class="included-icon" style="background:var(--brand-xsoft)">🤝</div><div><strong>Placement Support</strong> — resume review, portfolio &amp; career prep</div></div>
+        </div>
+      </div>
+
+      <!-- WHO BENEFITS -->
+      <div class="card">
+        <div class="card-head card-head-purple">
+          <div class="card-icon ci-purple">👤</div>
+          <span class="card-title">Who Should Join</span>
+        </div>
+        <div class="card-body" style="display:flex;flex-direction:column;gap:8px;">
+          <div class="aud-card ac-fresher">
+            <div class="aud-who">
+              <div class="aud-avatar av-fresher">🎓</div>
+              <div class="aud-persona">Freshers &amp; Graduates</div>
+            </div>
+            <div class="aud-outcomes">
+              <div class="aud-out"><span class="aud-out-dot odd-fresher"></span>B.Des / B.Tech / BCA / BFA — any background, zero prerequisites</div>
+              <div class="aud-out"><span class="aud-out-dot odd-fresher"></span>Target: Junior Product Designer, UX Researcher, Visual Designer</div>
+            </div>
+          </div>
+          <div class="aud-card ac-pro">
+            <div class="aud-who">
+              <div class="aud-avatar av-pro">💼</div>
+              <div class="aud-persona">Working Professionals</div>
+            </div>
+            <div class="aud-outcomes">
+              <div class="aud-out"><span class="aud-out-dot odd-pro"></span>Devs, marketers &amp; PMs pivoting to design — weekend batch ideal</div>
+              <div class="aud-out"><span class="aud-out-dot odd-pro"></span>Target: Product Designer, UX Lead, AI Designer</div>
+            </div>
+          </div>
+          <div class="aud-card ac-dev">
+            <div class="aud-who">
+              <div class="aud-avatar av-dev">⚙️</div>
+              <div class="aud-persona">Developer → Designer</div>
+            </div>
+            <div class="aud-outcomes">
+              <div class="aud-out"><span class="aud-out-dot odd-dev"></span>Add Figma, Design Systems &amp; UX to existing dev skills — become T-shaped</div>
+              <div class="aud-out"><span class="aud-out-dot odd-dev"></span>Target: Full-Stack Product Designer, Design Technologist</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /right col -->
+  </div><!-- /main grid -->
+
+  <!-- 8 INDUSTRY PROJECTS -->
+  <div>
+    <div class="sec-label">8 Industry Projects — Portfolio-Ready Deliverables</div>
+    <div class="projects-grid">
+      <div class="proj-card">
+        <div class="proj-card-head">
+          <span class="proj-num">P01</span>
+          <span class="proj-mod">Module 1</span>
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-title">30 Days × 30 Screens</div>
+          <div class="proj-desc">Dribbble-style UI challenge with process documentation uploaded publicly</div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-card-head">
+          <span class="proj-num">P02</span>
+          <span class="proj-mod">Module 2</span>
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-title">UX Research &amp; Audit</div>
+          <div class="proj-desc">Usability testing &amp; structured UX audit on Swiggy / Zomato</div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-card-head">
+          <span class="proj-num">P03</span>
+          <span class="proj-mod">Module 3</span>
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-title">Mini Design System</div>
+          <div class="proj-desc">Full design system for web &amp; mobile including tokens, components &amp; states</div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-card-head">
+          <span class="proj-num">P04</span>
+          <span class="proj-mod">Module 4</span>
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-title">AI-Powered UX Report</div>
+          <div class="proj-desc">AI tools to optimize Meesho / Myntra UX &amp; generate improvement report</div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-card-head">
+          <span class="proj-num">P05</span>
+          <span class="proj-mod">Module 5</span>
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-title">Business Product Document</div>
+          <div class="proj-desc">Field study + business-oriented product strategy &amp; revenue model doc</div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-card-head">
+          <span class="proj-num">P06</span>
+          <span class="proj-mod">Module 6</span>
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-title">Industry Case Study</div>
+          <div class="proj-desc">End-to-end product design with full research documentation &amp; case study</div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-card-head">
+          <span class="proj-num">P07</span>
+          <span class="proj-mod">Module 7</span>
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-title">Expert Panel Presentation</div>
+          <div class="proj-desc">Industry-standard pitch deck presented in a live mock expert panel session</div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-card-head">
+          <span class="proj-num">P08</span>
+          <span class="proj-mod">Module 8</span>
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-title">Live MVP Deployment</div>
+          <div class="proj-desc">Landing page + multi-page MVP built with Framer / Lovable AI &amp; deployed live</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CERTIFICATES -->
+  <div>
+    <div class="sec-label">Certificates — What Learners Receive</div>
+    <div class="cert-wrap">
+      <div class="cert-head">
+        <div class="cert-head-icon">🎓</div>
+        <div class="cert-head-title">Certificates Upon Completion</div>
+        <div class="cert-head-sub">2 Recognised Certificates</div>
+      </div>
+      <div class="cert-body">
+        <div class="cert-box cert-box-b">
+          <div class="cert-seal cs-b">💼</div>
+          <div>
+            <div class="cert-org">HCL · GUVI</div>
+            <div class="cert-name">HCL GUVI Certificate</div>
+            <div class="cert-note">Industry-recognised certificate from HCL &amp; GUVI platform</div>
+          </div>
+        </div>
+        <div class="cert-box cert-box-c">
+          <div class="cert-seal cs-c">🇮🇳</div>
+          <div>
+            <div class="cert-org">NSDC</div>
+            <div class="cert-name">NSDC Certificate</div>
+            <div class="cert-note">National Skill Development Corporation — government-backed certification</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- USPs -->
+  <div>
+    <div class="sec-label">Why This Programme Stands Out</div>
+    <div class="usp-wrap">
+      <div class="usp-head">
+        <div class="usp-head-icon">⭐</div>
+        <div class="usp-head-title">6 Key Differentiators</div>
+        <div class="usp-head-sub">What sets GUVI Design apart</div>
+      </div>
+      <div class="usp-body">
+        <div class="usp-box">
+          <div class="usp-box-top"><div class="usp-box-emo">🤖</div><div class="usp-box-title">AI-First Design Curriculum</div></div>
+          <div class="usp-box-desc">Dedicated M04 on LLMs, prompt engineering &amp; AI persona analysis — core to the programme, not an add-on.</div>
+        </div>
+        <div class="usp-box">
+          <div class="usp-box-top"><div class="usp-box-emo">🎨</div><div class="usp-box-title">Visual + Systems + Experience</div></div>
+          <div class="usp-box-desc">From design foundations to atomic design systems in one progressive linear track — no gaps, no jumps.</div>
+        </div>
+        <div class="usp-box">
+          <div class="usp-box-top"><div class="usp-box-emo">📈</div><div class="usp-box-title">Design Meets Business Strategy</div></div>
+          <div class="usp-box-desc">M05 covers revenue models, PMF &amp; design trade-offs — rare in design programmes, critical for senior roles.</div>
+        </div>
+        <div class="usp-box">
+          <div class="usp-box-top"><div class="usp-box-emo">🌐</div><div class="usp-box-title">Deploy a Live Product</div></div>
+          <div class="usp-box-desc">M08 ends with a real live MVP using Framer &amp; Lovable AI — a tangible outcome most design courses never deliver.</div>
+        </div>
+        <div class="usp-box">
+          <div class="usp-box-top"><div class="usp-box-emo">🗂️</div><div class="usp-box-title">8 Portfolio Projects</div></div>
+          <div class="usp-box-desc">Every module closes with a real deliverable — 30-screen challenges, case studies, pitch decks &amp; a deployed MVP.</div>
+        </div>
+        <div class="usp-box">
+          <div class="usp-box-top"><div class="usp-box-emo">🎤</div><div class="usp-box-title">Presentation &amp; Career Support</div></div>
+          <div class="usp-box-desc">Mock expert panels, client-level pitch decks, resume review &amp; placement support — learning to landing the role.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="pricing-band">
+    <div class="pricing-band-grid"></div>
+    <div style="position:relative;z-index:1;">
+      <div class="pricing-label">MSP · Full Payment</div>
+      <div class="pricing-amount">₹85,999</div>
+      <div class="pricing-note">One-time payment · Best value · No extra charges</div>
+      <span class="pricing-tag">Full Payment Plan</span>
+    </div>
+    <div class="pricing-divider" style="position:relative;z-index:1;"></div>
+    <div style="position:relative;z-index:1;">
+      <div class="pricing-label">MSP · Instalment Plan</div>
+      <div class="pricing-amount">₹90,999</div>
+      <div class="pricing-note">Flexible instalments · Easy on the pocket</div>
+      <span class="pricing-tag">Partial Payment Plan</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-brand">AI-Powered UI/UX &amp; Product Design Fellowship — GUVI 2026</div>
+    <div class="footer-meta">Sales Reference · Internal Use Only</div>
+    <div class="footer-tags">
+      <span class="ftag ftag-b">AI-Powered</span>
+      <span class="ftag ftag-p">Product Design</span>
+      <span class="ftag ftag-g">Live MVP</span>
+      <span class="ftag ftag-s">8 Projects</span>
+    </div>
+  </div>
+
+</div><!-- /wrapper -->
+</body>
+</html>
